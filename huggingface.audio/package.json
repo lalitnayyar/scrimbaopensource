@@ -1,0 +1,19 @@
+{
+  "name": "huggingface.audio",
+  "version": "1.0.0",
+  "description": "https://scrimba.com/the-ai-engineer-path-c02v/~01b",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@huggingface/inference": "^1.8.0",
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "vite": "^6.0.6"
+  }
+}

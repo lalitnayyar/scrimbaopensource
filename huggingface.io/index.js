@@ -11,16 +11,19 @@ const hf = new HfInference(process.env.HF_TOKEN);
 
 // Hugging Face Inference API docs: https://huggingface.co/docs/huggingface.js/inference/README
 
-const textToClassify = "I just bought a new camera. It's been a real disappointment.";
+const textToTranslate = "I just bought a new camera. It's been a real disappointment.";
 
 async function runInference() {
-  const response = await hf.textClassification({
-    model: "distilbert-base-uncased-finetuned-sst-2-english",
-    inputs: textToClassify
-  });
-
-  console.log(response[0].label);
-  console.log(response);
+    const textTranslationResponse = await hf.translation({
+        model: 'facebook/mbart-large-50-many-to-many-mmt',
+        inputs: textToTranslate,
+        parameters: {
+            src_lang: "en_XX",
+            tgt_lang: "hi_IN"
+        }
+    });
+    console.log("orginal text: ", textToTranslate);
+    console.log("translated text: ",textTranslationResponse);
 }
 
 runInference();

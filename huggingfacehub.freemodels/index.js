@@ -35,9 +35,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (await isModelInferenceEnabled(model.name)) {
                 models.push(model);
                 const option = document.createElement('option');
-                option.value = `${model.likes} Likes: https://huggingface.co/${model.name}`;
-                option.text = `${model.likes} Likes: https://huggingface.co/${model.name}`;
-                modelList.appendChild(option);
+                models.sort((model1, model2) => model2.likes - model1.likes)
+                for (const model of models) {
+                    console.log(`${model.likes} Likes: https://huggingface.co/${model.name}`)
+                    option.value = `${model.likes} Likes: https://huggingface.co/${model.name}`;
+                    option.text = `${model.likes} Likes: https://huggingface.co/${model.name}`;
+                    modelList.appendChild(option);
+                }
+
             }
         }
 

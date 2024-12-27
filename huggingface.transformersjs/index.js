@@ -5,6 +5,7 @@ const status = document.getElementById('status')
 const image = document.getElementById('image')
 const detectObjectsButton = document.getElementById('detect-objects')
 const imageContainer = document.getElementById('image-container')
+const outputList = document.getElementById('output-list')
 
 // Create a new object detection pipeline
 status.textContent = 'Loading model...'
@@ -30,6 +31,16 @@ async function detectAndDrawObjects() {
         percentage: true
     });
     
+    // Clear previous results
+    outputList.innerHTML = '';
+
+    // List Detected Objects
+    detectedObjects.forEach(obj => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `Label: ${obj.label}, Score: ${obj.score}`;
+        outputList.appendChild(listItem);
+    });
+
     // Draw Detected Objects
     status.textContent = 'Drawing...'
     detectedObjects.forEach(obj => {

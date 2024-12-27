@@ -12,11 +12,17 @@ document.body.appendChild(outputList);
 async function classifyImage() {
     try {
         status.textContent = 'Loading model...';
-        const classifier = await pipeline('image-classification', 'onnx-community/dinov2-with-registers-small-imagenet1k-1-layer');
+        const detector = await pipeline('object-detection', 'Xenova/detr-resnet-50');
+        const img = 'https://huggingface.co/datasets/Xenova/transformers.js-docs/resolve/main/cats.jpg';
+        
+        //const detector = await pipeline('object-detection', 'Xenova/yolos-tiny');
         status.textContent = 'Detecting Objects...';
 
-        const url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfO-M4Mgy5-n98qk9Xq0kJoBcRnXUhIAIcLQ&s';
-        const output = await classifier(url);
+       // const url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfO-M4Mgy5-n98qk9Xq0kJoBcRnXUhIAIcLQ&s';
+
+        const output = await detector(image.src, { threshold: 0.9 });
+
+        //const output = await detector(url);
         console.log(output);
 
         // Clear previous results
